@@ -10,6 +10,7 @@
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -89,14 +90,15 @@ height:150px;
 object-fit:cover;
 border-radius:18px;
 box-shadow:0 10px 25px rgba(0,0,0,.25);
-transition:.4s;
+cursor:pointer;
+transition:.3s;
 }
 
 .gallery img:hover{
 transform:scale(1.08);
 }
 
-/* 🎥 VIDEO PLAYER */
+/* VIDEO */
 .video-container{
 display:flex;
 justify-content:center;
@@ -166,6 +168,33 @@ color:white;
 margin-top:20px;
 }
 
+/* 💖 LIGHTBOX FULLSCREEN */
+#lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.92);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+#lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:15px;
+box-shadow:0 0 30px white;
+animation:zoom 0.3s ease;
+}
+
+@keyframes zoom{
+from{transform:scale(0.7);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
 /* RESPONSIVE */
 @media(max-width:900px){
 .gallery{
@@ -185,6 +214,7 @@ grid-template-columns:repeat(2,1fr);
 
 <body>
 
+<!-- HEADER -->
 <header>
 
 <div>
@@ -192,14 +222,11 @@ grid-template-columns:repeat(2,1fr);
 <h1>Happy 1st Monthsary ❤️</h1>
 
 <p>
-One month with you already feels like a beautiful dream.
-Thank you for being my peace, my happiness,
-and my favorite person in the world.
+One month with you already feels like a dream.
+Thank you for being my happiness, my peace, and my home.
 </p>
 
-<button onclick="showLove()">
-Click Me ❤️
-</button>
+<button onclick="showLove()">Click Me ❤️</button>
 
 </div>
 
@@ -208,25 +235,25 @@ Click Me ❤️
 <!-- GALLERY -->
 <section>
 
-<div class="title">Our Beautiful Memories 📸</div>
+<div class="title">Our Memories 📸</div>
 
 <div class="gallery">
 
-<img src="pic1.jfif">
-<img src="pics2.jfif">
-<img src="pics3.jfif">
-<img src="pics4.jfif">
-<img src="pics5.jfif">
-<img src="pics6.jfif">
+<img src="pic1.jfif" onclick="openImage(this.src)">
+<img src="pics2.jfif" onclick="openImage(this.src)">
+<img src="pics3.jfif" onclick="openImage(this.src)">
+<img src="pics4.jfif" onclick="openImage(this.src)">
+<img src="pics5.jfif" onclick="openImage(this.src)">
+<img src="pics6.jfif" onclick="openImage(this.src)">
 
 </div>
 
 </section>
 
-<!-- 🎥 VIDEO SECTION (ADDED) -->
+<!-- VIDEO -->
 <section>
 
-<div class="title">Our Special Video 🎥</div>
+<div class="title">Our Video 🎥</div>
 
 <div class="video-container">
 
@@ -241,7 +268,7 @@ Click Me ❤️
 <!-- LETTER -->
 <section>
 
-<div class="title">A Letter For You 💌</div>
+<div class="title">Love Letter 💌</div>
 
 <div class="letter">
 
@@ -277,23 +304,39 @@ Happy 1st Monthsary, my love. I miss you so much, and I love you more than words
 <h2>❤️ Surprise ❤️</h2>
 
 <p>
-You are my favorite person in the world.
-Thank you for everything.
-I love you endlessly ❤️
+You are my favorite person in the world. Thank you for everything. I love you endlessly ❤️
+
+
 </p>
 
-<button onclick="closeLove()">I love you ❤️</button>
+<button onclick="closeLove()">Awww ❤️</button>
 
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeImage()">
+<img id="lightboxImg">
 </div>
 
 <script>
 
+/* POPUP */
 function showLove(){
 document.getElementById("popup").style.display="block";
 }
 
 function closeLove(){
 document.getElementById("popup").style.display="none";
+}
+
+/* LIGHTBOX */
+function openImage(src){
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("lightboxImg").src=src;
+}
+
+function closeImage(){
+document.getElementById("lightbox").style.display="none";
 }
 
 /* HEARTS */
